@@ -1,7 +1,7 @@
 const CAKE_ORDERED="CAKE_ORDERED"
 const CAKE_RESTOCKED="CAKE_RESTOCKED"
 const redux=require("redux")
-const createStore=redux.legacy_createStore()
+const createStore=redux.legacy_createStore
 
 
 // event or action creaters
