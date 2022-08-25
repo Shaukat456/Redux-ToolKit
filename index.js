@@ -6,7 +6,12 @@ const redux=require("redux")
 const createStore=redux.legacy_createStore
 const bindActionCreater=redux.bindActionCreators
 const combineReducers=redux.combineReducers
+const applymiddleware=redux.applyMiddleware;
 
+
+
+const reduxlogger=require("redux-logger");
+const logger= reduxlogger.createLogger()
 
 // event or action creaters
 function orderCake(){
@@ -93,7 +98,7 @@ const rootreducer=redux.combineReducers({
 
 
 
-const store= createStore(rootreducer)
+const store= createStore(rootreducer, applymiddleware(logger))
 
 console.log("initial State", store.getState())
 
@@ -111,11 +116,13 @@ const unsubscribe=store.subscribe(()=>{
 const actions= bindActionCreater({orderCake , RestockCake,orderIceCream,RestockIceCream },store.dispatch)
 
 actions.orderCake();
-// actions.orderCake();
-// actions.orderCake();
-actions.RestockCake(3);
-actions.orderIceCream();
-// actions.RestockIceCream(4)
+actions.orderCake();
+actions.orderCake();
+// actions.RestockCake(3);
+// actions.orderIceCream();
+// actions.RestockIceCream(10)
 
 
 unsubscribe()
+
+// actions.orderIceCream();
