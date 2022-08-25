@@ -2,7 +2,7 @@ const CAKE_ORDERED="CAKE_ORDERED"
 const CAKE_RESTOCKED="CAKE_RESTOCKED"
 const redux=require("redux")
 const createStore=redux.legacy_createStore
-
+const bindActionCreater=redux.bindActionCreators
 
 // event or action creaters
 function orderCake(){
@@ -14,7 +14,7 @@ function orderCake(){
 
 const initialState={
     numCakes:4,
-    s:2
+    teststate:2
 }
 
 function RestockCake(qty=1){
@@ -55,9 +55,16 @@ const unsubscribe=store.subscribe(()=>{
     console.log("updated state", store.getState())
 })
 
-store.dispatch(orderCake())
-store.dispatch(orderCake())
-store.dispatch(orderCake())
-store.dispatch(RestockCake(10))
+// store.dispatch(orderCake())
+// store.dispatch(orderCake())
+// store.dispatch(orderCake())
+// store.dispatch(RestockCake(3))
+
+const actions= bindActionCreater({orderCake , RestockCake},store.dispatch)
+
+actions.orderCake();
+actions.orderCake();
+actions.orderCake();
+actions.RestockCake(3);
 
 unsubscribe()
